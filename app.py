@@ -25,7 +25,7 @@ if st.checkbox('Show raw data'):
     st.write(data[['start_datetime', 'marketprice', 'unit']])
 
 # Interactive Streamlit line chart
-st.line_chart(data.set_index('start_datetime')['marketprice'])
+st.line_chart(data.set_index('start_datetime')['marketprice'], use_container_width=True)
 
 # Data visualization using Matplotlib
 fig, ax = plt.subplots(figsize=(10, 5))

@@ -6,7 +6,7 @@ services:
     container_name: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_ROOT_PASSWORD: awattar
       MYSQL_DATABASE: awattar
     ports:
       - "3306:3306"
@@ -23,7 +23,7 @@ services:
       INFLUXDB_DB: awattardb
       INFLUXDB_HTTP_AUTH_ENABLED: 'true'
       INFLUXDB_ADMIN_USER: admin
-      INFLUXDB_ADMIN_PASSWORD: my-secret-pw
+      INFLUXDB_ADMIN_PASSWORD: awattar
     volumes:
       - influxdb_data:/var/lib/influxdb
 
