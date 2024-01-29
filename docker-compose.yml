@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: awattar
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    restart: always
+    ports:
+      - "8086:8086"
+    environment:
+      INFLUXDB_DB: awattardb
+      INFLUXDB_HTTP_AUTH_ENABLED: 'true'
+      INFLUXDB_ADMIN_USER: admin
+      INFLUXDB_ADMIN_PASSWORD: my-secret-pw
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+
+volumes:
+  mysql_data:
+  influxdb_data:
