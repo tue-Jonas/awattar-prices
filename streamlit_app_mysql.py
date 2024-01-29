@@ -3,20 +3,26 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pymysql
+import time
 
 # Establish a connection to the database
 def connect_to_mysql():
-    return pymysql.connect(
+    start_time = time.time()
+    conn = pymysql.connect(
         host='localhost', 
         user='root', 
         password='awattar', 
         db='awattar', 
         cursorclass=pymysql.cursors.DictCursor
     )
+    end_time = time.time()
+    print(f"Time taken to connect to MySQL Database: {end_time - start_time} seconds")
+    return conn
 
 # Load data from MySQL database
 @st.cache_data
 def load_data_from_mysql():
+    start_time = time.time()
     conn = connect_to_mysql()
     try:
         with conn.cursor() as cursor:
@@ -30,6 +36,8 @@ def load_data_from_mysql():
             df['end_datetime'] = pd.to_datetime(df['end_timestamp'] / 1000, unit='s')
     finally:
         conn.close()
+    end_time = time.time()
+    print(f"Time taken to load data from MySQL: {end_time - start_time} seconds")
     return df
 
 # Fetch data
